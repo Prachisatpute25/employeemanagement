@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <meta name="description" content="Modern employee management system with CRUD operations">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Employee Management System</h1>
+                <p class="subtitle">Manage your workforce efficiently</p>
+            </div>
+            <button class="btn btn-primary" id="addEmployeeBtn">
+                <span class="btn-icon">+</span>
+                Add Employee
+            </button>
+        </header>
+
+        <main class="main-content">
+            <!-- Statistics Dashboard -->
+            <div class="stats-dashboard" id="statsDashboard">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalEmployees">0</div>
+                        <div class="stat-label">Total Employees</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalSalary">$0</div>
+                        <div class="stat-label">Total Salary</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="avgSalary">$0</div>
+                        <div class="stat-label">Average Salary</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalDepartments">0</div>
+                        <div class="stat-label">Departments</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="search-filter-bar">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Search employees by name, email, role, or department..." class="search-input">
+                    <button class="clear-search" id="clearSearch" style="display: none;">✕</button>
+                </div>
+                <div class="filter-container">
+                    <select id="departmentFilter" class="filter-select">
+                        <option value="">All Departments</option>
+                    </select>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="name-asc">Sort: Name (A-Z)</option>
+                        <option value="name-desc">Sort: Name (Z-A)</option>
+                        <option value="salary-asc">Sort: Salary (Low-High)</option>
+                        <option value="salary-desc">Sort: Salary (High-Low)</option>
+                        <option value="date-desc">Sort: Newest First</option>
+                        <option value="date-asc">Sort: Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading employees...</p>
+            </div>
+
+            <!-- Employees Grid -->
+            <div class="employees-grid" id="employeesGrid">
+                <!-- Employee cards will be dynamically inserted here -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">📋</div>
+                <h2 id="emptyStateTitle">No Employees Found</h2>
+                <p id="emptyStateMessage">Start by adding your first employee to the system</p>
+            </div>
+        </main>
+
+        <!-- Toast Notification Container -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <!-- Modal for Add/Edit Employee -->
+    <div class="modal" id="employeeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Employee</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="employeeForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="employee@example.com">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input type="text" id="role" name="role" required placeholder="e.g., Developer">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" name="department" required placeholder="e.g., IT">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <input type="number" id="salary" name="salary" required placeholder="50000" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_joined">Date Joined</label>
+                        <input type="date" id="date_joined" name="date_joined" required>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

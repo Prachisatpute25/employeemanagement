@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ems_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    # We don't need 'links' to 'db' because we connect to RDS via host/URL
+    volumes:
+       - ./backend/app:/app/app # Optional: for hot reloading if needed, but safer to bake in.
