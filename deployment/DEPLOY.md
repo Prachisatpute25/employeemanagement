@@ -82,11 +82,15 @@ USE employee_db;
    ssh back in to refresh group membership.
    ```bash
    cd ~/employeemanagement
-   export DB_HOST=<RDS_ENDPOINT>
-   export DB_USER=admin
-   export DB_PASSWORD=your-secure-password
-   export DB_NAME=employee_db
    
+   # Create .env file from example
+   cp .env.example .env
+   
+   # Edit .env file with your RDS details
+   nano .env
+   # Update DB_HOST, DB_USER, DB_PASSWORD with your RDS info
+   
+   # Start the application
    docker-compose -f docker-compose.ec2.yml up -d --build
    ```
 
